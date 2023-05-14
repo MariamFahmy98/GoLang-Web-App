@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-world
+  template:
+    metadata:
+      labels:
+        app: hello-world
+    spec:
+      containers:
+        - name: hello-world-app 
+          image: mariamfahmy98/hello-world-app:latest
+          ports:
+            - containerPort: 3000
+          readinessProbe:
+            tcpSocket: 
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 5
